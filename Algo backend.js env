@@ -1,1 +1,4 @@
+#Cet algorithme configure le port du serveur backend et définit l'URL de l'API utilisée pour générer les questions QCM.
 
+PORT=5000
+API_URL=https://api.ollama.com/generate
