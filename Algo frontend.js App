@@ -1,1 +1,31 @@
+//Cet algorithme affiche une interface permettant de téléverser un fichier PDF, de générer des questions QCM, et de les afficher pour que l'utilisateur puisse y répondre.
 
+import React, { useState } from 'react';
+import FileUpload from './components/FileUpload';
+import QuestionCard from './components/QuestionCard';
+import './App.css';
+
+function App() {
+    const [questions, setQuestions] = useState([]);
+
+    const handleQuestionsGenerated = (generatedQuestions) => {
+        setQuestions(generatedQuestions);
+    };
+
+    return (
+        <div style={{ padding: "20px" }}>
+            <h1>Générateur de QCM</h1>
+            <FileUpload onQuestionsGenerated={handleQuestionsGenerated} />
+            {questions.length > 0 && (
+                <div>
+                    <h2>Répondez aux questions :</h2>
+                    {questions.map((question, index) => (
+                        <QuestionCard key={index} question={question} index={index} />
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
+export default App;
