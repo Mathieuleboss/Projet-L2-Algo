@@ -1,1 +1,8 @@
-al
+//Cet algorithme configure les commandes pour démarrer le serveur de développement React et générer une version optimisée du projet pour la production.
+
+{
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  }
+}
