@@ -1,1 +1,21 @@
+//Cette algorithme écrit en CSS permet la génération d'une interface pour le QCM, le CSS étant régulièrement utilisé pour les interfaces des sites web.
 
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  color: #333;
+}
