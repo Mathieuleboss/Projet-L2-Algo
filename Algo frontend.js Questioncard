@@ -1,1 +1,33 @@
+//Cet algorithme affiche une question à choix multiples et permet à l'utilisateur de sélectionner une réponse.
 
+import React, { useState } from 'react';
+
+function QuestionCard({ question, index }) {
+    const [selectedAnswer, setSelectedAnswer] = useState("");
+
+    const handleAnswerChange = (e) => {
+        setSelectedAnswer(e.target.value);
+    };
+
+    return (
+        <div style={{ marginBottom: "20px" }}>
+            <h3>Question {index + 1}: {question.text}</h3>
+            {question.options.map((option, idx) => (
+                <div key={idx}>
+                    <label>
+                        <input
+                            type="radio"
+                            name={`question${index}`}
+                            value={option}
+                            onChange={handleAnswerChange}
+                            checked={selectedAnswer === option}
+                        />
+                        {option}
+                    </label>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+export default QuestionCard;
