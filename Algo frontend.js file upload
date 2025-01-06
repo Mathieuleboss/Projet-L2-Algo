@@ -1,1 +1,51 @@
+//Cet algorithme permet à l'utilisateur de téléverser un fichier, l'envoie au backend pour traitement, et récupère les questions QCM générées.
 
+import React, { useState } from 'react';
+
+function FileUpload({ onQuestionsGenerated }) {
+    const [file, setFile] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
+
+    const handleFileSubmit = async () => {
+        if (!file) {
+            setError("Veuillez sélectionner un fichier.");
+            return;
+        }
+        setError("");
+        setLoading(true);
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const response = await fetch("http://localhost:5000/upload", {
+                method: "POST",
+                body: formData,
+            });
+            const data = await response.json();
+            onQuestionsGenerated(data.questions);
+        } catch (error) {
+            setError("Erreur lors du traitement du fichier.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div>
+            <h2>Upload de votre fichier</h2>
+            <input type="file" onChange={handleFileChange} />
+            <button onClick={handleFileSubmit} disabled={loading}>
+                {loading ? "En traitement..." : "Envoyer"}
+            </button>
+            {error && <p style={{ color: "red" }}>{error}</p>}
+        </div>
+    );
+}
+
+export default FileUpload;
